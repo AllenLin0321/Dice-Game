@@ -36,6 +36,8 @@ document.querySelector('.btn-roll').addEventListener('click',function(){
     
         // 3. Update the round score IF the rolled number was NOT a 1
         if (((dice_1 === previous_dice_1) && (dice_1===6))||((dice_2 === previous_dice_2) && (dice_2===6))){
+            scores[activePlayer] = 0;
+            document.getElementById('score-' + activePlayer).textContent = 0; 
             changePlayer();
         } else if ((dice_1 !== 1) && (dice_2 !== 1)) {
             // Add score
@@ -45,7 +47,7 @@ document.querySelector('.btn-roll').addEventListener('click',function(){
             // Next player
             changePlayer();
         }
-
+        console.log(finalScore);
     }
 
 });
@@ -127,9 +129,9 @@ function init(){
 
 function setFinalScore() {
     var x = document.getElementById('final-score').value;
-    if (x===''){
-        finalScore=100;
-    }else {
+    if (x && isNaN(x)){
         finalScore = x;
+    }else {
+        finalScore=100;
     }
 }
